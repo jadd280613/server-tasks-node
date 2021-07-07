@@ -44,7 +44,7 @@ exports.obtenerTareas = async (req, res) => {
 
         try {
             // Extraer el proyecto y comprobar si existe
-            const { proyecto } = req.body;
+            const { proyecto } = req.query;
 
 
             const existeProyecto = await Proyecto.findById(proyecto);
@@ -109,7 +109,7 @@ exports.actualizarTarea = async (req, res ) => {
 exports.eliminarTarea = async (req, res) => {
     try {
         // Extraer el proyecto y comprobar si existe
-        const { proyecto  } = req.body;
+        const { proyecto  } = req.query;
 
         // Si la tarea existe o no
         let tarea = await Tarea.findById(req.params.id);
@@ -120,7 +120,6 @@ exports.eliminarTarea = async (req, res) => {
 
         // extraer proyecto
         const existeProyecto = await Proyecto.findById(proyecto);
-        console.log(existeProyecto);
 
         // Revisar si el proyecto actual pertenece al usuario autenticado
         if(existeProyecto.creador.toString() !== req.usuario.id ) {
